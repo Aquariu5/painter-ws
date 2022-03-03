@@ -1,0 +1,11 @@
+.Footer {
+    top: 95vh;
+    position: fixed;
+    width: 100vw;
+    height: 5vh;
+    background-color: brown;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    color: #fff;
+}

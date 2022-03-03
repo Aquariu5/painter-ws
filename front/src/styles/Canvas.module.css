@@ -1,0 +1,10 @@
+.Canvas {
+    background-color: bisque;
+    border: 1px solid blue;
+    margin: 20px;
+}
+
+.Name {
+    position: absolute;
+    z-index: 999;
+}
