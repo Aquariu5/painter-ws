@@ -7,6 +7,7 @@ import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 import LayersClearIcon from '@mui/icons-material/LayersClear';
 import { observer } from "mobx-react-lite";
 import toolbar from "../store/toolbar";
+import { TextField } from "@mui/material";
 export const Toolbar = observer(() => {
 
     const takeBrush = () => {
@@ -33,7 +34,8 @@ export const Toolbar = observer(() => {
             Панель инструментов
             <FormatPaintIcon fontSize="large" onClick={takeBrush} className={cl.Icon}/>
             <LayersClearIcon fontSize="large" onClick={clearArea} />
-            <Button variant="primary" onClick={sendMessage}>WS</Button>
+            <input type='color' onChange={e => toolbar.setColor(e.target.value)} className={cl.Color}/>
+            {/* <Button variant="primary" onClick={sendMessage}>WS</Button> */}
         </Grid>
     )
 });

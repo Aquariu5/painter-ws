@@ -34,17 +34,19 @@ const Test = observer(({children}) => {
             data = JSON.parse(data.data);
             switch (data.method) {
                 case 'paint':
-                    toolbar.draw(data.x, data.y, data.action);
+                    toolbar.draw(data.x, data.y, data.action, data.color);
                     toolbar.addName(data.name);
                     toolbar.changePositionByName(data.name, data.x, data.y + 100);
                     // setTop(data.y + 100);
                     // setLeft(data.x);
                     // setDisplay('block');
                     //window.getElementById('names').appendChild('div');
-
                     break;
                 case 'success':
                     toolbar.addName(data.name);
+                    break;
+                case 'message':
+                    toolbar.addMessage(data);
                     break;
             }
         }
@@ -55,7 +57,7 @@ const Test = observer(({children}) => {
     return (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <canvas 
-                width={window.innerWidth - 50}
+                width={window.innerWidth / 2}
                 height={window.innerHeight - 200}
                 className={cl.Canvas}
                 ref={canvas}
