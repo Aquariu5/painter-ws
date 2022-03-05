@@ -29,7 +29,10 @@ app.ws('/', (ws, res) => {
             case 'paint':
                 broadCastSend(ws, data);
                 break;
-
+            
+            case 'message':
+                broadMsgSend(ws, data);
+                break;
             default:
                 break;
             
@@ -38,6 +41,23 @@ app.ws('/', (ws, res) => {
     })
 });
 
+app.ws('/message', (ws, res) => {
+    ws.on('message', (data) => {
+        data = JSON.parse(data);
+        broadMsgSend(ws, data);
+    })
+})
+app.post('/message', (req, res) => {
+    let body = req.body;
+    console.log('body', body);
+});
+
+const broadMsgSend = (ws, data) => {
+    wss.clients.forEach(client => {
+        client.send(JSON.stringify(data));
+    })
+}
+
 const broadCastSend = (ws, data) => {
     wss.clients.forEach(client => {
         client.send(JSON.stringify({
@@ -45,7 +65,8 @@ const broadCastSend = (ws, data) => {
             x: data.x,
             y: data.y,
             action: data.action,
-            name: data.name
+            name: data.name,
+            color: data.color
         }));
     })
 }
