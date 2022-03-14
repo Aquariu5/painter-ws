@@ -11,6 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Left } from './components/ui-components/Left';
 // import { History } from './components/History';
 // import { Menu } from './components/Menu';
+import Chat from './components/Chat';
 
  import { Footer } from './components/Footer';
 import cl from './styles/App.module.css';
@@ -26,23 +27,26 @@ function App() {
 
 
   return (
-    <BrowserRouter>
-        <div className={cl.App}>
-          <div>
-            <Navbar bg="light">
+      <BrowserRouter>
+          <div className={cl.App}>
+              <Navbar bg="light">
               <Container>
-                  <Button onClick={handleShow} variant="warning">Left menu</Button>
+              <Button onClick={handleShow} variant="warning">Left menu</Button>
               </Container>
-            </Navbar>
-             <Left show={show} handleShow={handleShow}/>
-             <Toolbar />
-             <Canvas/>
+              </Navbar>
+              <Left show={show} handleShow={handleShow}/>
+              <Toolbar />
+              <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+              <div>
+                  <Canvas/>
+              </div>
+              <Chat />
           </div>
-
+          
           <Footer/>
-        </div>
-    </BrowserRouter>
-  )
+          </div>
+      </BrowserRouter>
+    )
 }
 
 export default App;

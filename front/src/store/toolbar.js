@@ -9,6 +9,8 @@ class Toolbar {
     ownname = null;
     names = [];
     //wsId = null;
+    messages = [];
+    color = 'black';
     constructor() {
         makeAutoObservable(this);
     }
@@ -17,11 +19,18 @@ class Toolbar {
         this.toolbar = val;
     }
 
+    setColor(color) {
+        this.color = color;
+    }
     addName(name) {
         //this.names = [...this.names, {name, x: 0, y: 0}];
         let idx = this.names.findIndex(el => el.name == name);
         if (idx == -1)
             this.names.push({name, x: 0, y: 0});
+    }
+
+    addMessage(msg) {
+        this.messages.push(msg);
     }
 
     changePositionByName(name, newX, newY) {
@@ -55,7 +64,8 @@ class Toolbar {
             x: e.pageX - e.target.offsetLeft,
             y: e.pageY - e.target.offsetTop,
             action: 'down',
-            name: this.ownname
+            name: this.ownname,
+            color: this.color
         }));
         
     }
@@ -67,7 +77,8 @@ class Toolbar {
             x: e.pageX - e.target.offsetLeft,
             y: e.pageY - e.target.offsetTop,
             action: 'up',
-            name: this.ownname
+            name: this.ownname,
+            color: this.color
         }));
     }
 
@@ -79,21 +90,24 @@ class Toolbar {
                 x: e.pageX - e.target.offsetLeft,
                 y: e.pageY - e.target.offsetTop,
                 action: 'move',
-                name: this.ownname
+                name: this.ownname,
+                color: this.color
             }));
             this.context.stroke();
             //toolbar.context.fillRect(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop, 2, 2);
         }
     }
 
-    draw(x,y, action) {
-        console.log('draw', x, y);
-
+    draw(x,y, action, color) {
+        console.log('draw', x, y, action, color);
+        this.context.fillStyle = color;
+        this.context.strokeStyle = color;
         //this.context.fillRect(x, y, 2, 2);
         switch (action) {
             case 'down':
                 this.context.beginPath();
                 this.context.moveTo(x, y);
+                
                 break;
             case 'move':
                 this.context.lineTo(x, y);

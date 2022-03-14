@@ -2,8 +2,13 @@
     height: 5vh;
     background-color: azure;
     box-shadow: 2px 2px 2px;
+
 }
 
 .Icon Grid:hover{
     cursor: pointer;
+}
+
+.Color {
+    margin-left: 5px;
 }

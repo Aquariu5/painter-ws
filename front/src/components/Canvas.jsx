@@ -14,6 +14,7 @@ const Test = observer(({children}) => {
     useEffect(() => {
         toolbar.setCanvas(canvas.current);
         let ws = new WebSocket('ws://localhost:5000/');
+        console.log('state', ws.readyState);
         toolbar.setWs(ws);
         
         toolbar.ws.onopen = () => {
