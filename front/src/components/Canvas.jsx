@@ -3,6 +3,7 @@ import cl from '../styles/Canvas.module.css';
 import toolbar from "../store/toolbar";
 import { observer } from "mobx-react-lite";
 import Name from "./Name";
+import { wsIp } from "./storage/constants";
 const Test = observer(({children}) => {
     const canvas = useRef();
     //const ctx =  canvas.getContext('2d');
@@ -13,7 +14,7 @@ const Test = observer(({children}) => {
     const [ownname, setOwnname] = useState('');
     useEffect(() => {
         toolbar.setCanvas(canvas.current);
-        let ws = new WebSocket('ws://localhost:5000/');
+        let ws = new WebSocket(wsIp);
         console.log('state', ws.readyState);
         toolbar.setWs(ws);
         

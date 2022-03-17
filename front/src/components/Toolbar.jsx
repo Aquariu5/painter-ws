@@ -7,7 +7,8 @@ import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 import LayersClearIcon from '@mui/icons-material/LayersClear';
 import { observer } from "mobx-react-lite";
 import toolbar from "../store/toolbar";
-import { TextField } from "@mui/material";
+import Tooltip from '@mui/material/Tooltip';
+import Slider from '@mui/material/Slider';
 export const Toolbar = observer(() => {
 
     const takeBrush = () => {
@@ -32,9 +33,27 @@ export const Toolbar = observer(() => {
     return (
         <Grid container className={cl.Toolbar}>
             Панель инструментов
-            <FormatPaintIcon fontSize="large" onClick={takeBrush} className={cl.Icon}/>
-            <LayersClearIcon fontSize="large" onClick={clearArea} />
-            <input type='color' onChange={e => toolbar.setColor(e.target.value)} className={cl.Color}/>
+            <Tooltip title="Кисть" placement="top">
+                <FormatPaintIcon fontSize="large" onClick={takeBrush} className={cl.Icon}/>
+            </Tooltip>
+
+            <Tooltip title="Очистить" placement="top">
+                <LayersClearIcon fontSize="large" onClick={clearArea} />
+            </Tooltip>
+
+            <Tooltip title="Цвет" placement="top">
+                <input type='color' onChange={e => toolbar.setColor(e.target.value)} className={cl.Color}/>
+            </Tooltip>
+
+            <Slider
+                defaultValue={50}
+                size="small" 
+                aria-label="Default"
+                valueLabelDisplay="auto"
+                style={{width: '100px', marginLeft: '20px'}}
+                value={toolbar.width}
+                onChange={e => toolbar.setWidth(e.target.value)}
+            />
             {/* <Button variant="primary" onClick={sendMessage}>WS</Button> */}
         </Grid>
     )

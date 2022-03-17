@@ -1,0 +1,1 @@
+export const wsIp = 'ws://localhost:5000/';

@@ -11,6 +11,7 @@ class Toolbar {
     //wsId = null;
     messages = [];
     color = 'black';
+    width = 1;
     constructor() {
         makeAutoObservable(this);
     }
@@ -19,6 +20,11 @@ class Toolbar {
         this.toolbar = val;
     }
 
+    setWidth(val) {
+        console.log('val', val);
+        this.width = val;
+        this.context.lineWidth = val;
+    }
     setColor(color) {
         this.color = color;
     }

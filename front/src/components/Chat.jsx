@@ -6,6 +6,7 @@ import { useRef } from "react";
 import axios from "axios";
 import toolbar from "../store/toolbar";
 import { observer } from "mobx-react-lite";
+
 const Chat = observer(() => {
     
     const text = useRef();
@@ -20,12 +21,21 @@ const Chat = observer(() => {
         };
         console.log('body', body);
         toolbar.ws.send(JSON.stringify(body));
+        text.current.querySelector('input').value = '';
     }
+
+    const sendAlsoMessage = (e) => {
+        console.log('ev', e);
+        if (e.key == 'Enter') {
+            sendMessage();
+        }
+    }
+
     return (
          <div className={cl.Chat}>
-                <div>
+                <div className={cl.MessagesSpace}>
                     {
-                        toolbar.messages.map(msg => <Message name={msg.name} body={msg.text}/>)
+                        toolbar.messages.map(msg => <Message key={msg.text} name={msg.name} body={msg.text}/>)
                     }
                 </div>
                 <div className={cl.Button}>
@@ -36,7 +46,10 @@ const Chat = observer(() => {
                     //onChange={e => setText(e.target.value)}
                     variant="standard"
                     ref = {text}
-                    style={{background: 'white'}} />
+                    style={{background: 'white'}}
+                    onKeyDown={sendAlsoMessage}
+
+                     />
                     <Button variant="contained" onClick={sendMessage}>Отправить</Button>
 
                 </div>
