@@ -66,7 +66,8 @@ const broadCastSend = (ws, data) => {
             y: data.y,
             action: data.action,
             name: data.name,
-            color: data.color
+            color: data.color,
+            width: data.width
         }));
     })
 }

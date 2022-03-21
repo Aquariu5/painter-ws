@@ -4,6 +4,7 @@ import toolbar from "../store/toolbar";
 import { observer } from "mobx-react-lite";
 import Name from "./Name";
 import { wsIp } from "./storage/constants";
+//import brush from "./models/Brush";
 const Test = observer(({children}) => {
     const canvas = useRef();
     //const ctx =  canvas.getContext('2d');
@@ -13,11 +14,12 @@ const Test = observer(({children}) => {
     console.log('nameslen', toolbar.names.length);
     const [ownname, setOwnname] = useState('');
     useEffect(() => {
+
         toolbar.setCanvas(canvas.current);
         let ws = new WebSocket(wsIp);
         console.log('state', ws.readyState);
         toolbar.setWs(ws);
-        
+
         toolbar.ws.onopen = () => {
             console.log('opened');
             let id = (Math.random() * 100).toFixed(0);
@@ -36,7 +38,8 @@ const Test = observer(({children}) => {
             data = JSON.parse(data.data);
             switch (data.method) {
                 case 'paint':
-                    toolbar.draw(data.x, data.y, data.action, data.color);
+                    //toolbar.draw(data.x, data.y, data.action, data.color);
+                    toolbar.toolbar.draw(toolbar.context, data);
                     toolbar.addName(data.name);
                     toolbar.changePositionByName(data.name, data.x, data.y + 100);
                     // setTop(data.y + 100);

@@ -1,7 +1,7 @@
 import {makeAutoObservable} from 'mobx'
-
+import brush from '../components/models/Brush';
 class Toolbar {
-    toolbar = null;
+    toolbar = brush;
     canvas = null;
     context = null;
     toggle = false;
@@ -10,24 +10,18 @@ class Toolbar {
     names = [];
     //wsId = null;
     messages = [];
-    color = 'black';
-    width = 1;
+    // color = 'black';
+    // width = 1;
     constructor() {
+        console.log('valbrush', brush);
         makeAutoObservable(this);
     }
 
     setToolbar(val) {
+        
         this.toolbar = val;
     }
-
-    setWidth(val) {
-        console.log('val', val);
-        this.width = val;
-        this.context.lineWidth = val;
-    }
-    setColor(color) {
-        this.color = color;
-    }
+    
     addName(name) {
         //this.names = [...this.names, {name, x: 0, y: 0}];
         let idx = this.names.findIndex(el => el.name == name);
@@ -71,7 +65,8 @@ class Toolbar {
             y: e.pageY - e.target.offsetTop,
             action: 'down',
             name: this.ownname,
-            color: this.color
+            color: this.toolbar.color,
+            width: this.toolbar.width
         }));
         
     }
@@ -84,7 +79,9 @@ class Toolbar {
             y: e.pageY - e.target.offsetTop,
             action: 'up',
             name: this.ownname,
-            color: this.color
+            // color: this.color
+            color: this.toolbar.color,
+            width: this.toolbar.width
         }));
     }
 
@@ -97,38 +94,15 @@ class Toolbar {
                 y: e.pageY - e.target.offsetTop,
                 action: 'move',
                 name: this.ownname,
-                color: this.color
+                // color: this.color
+                color: this.toolbar.color,
+                width: this.toolbar.width
             }));
             this.context.stroke();
             //toolbar.context.fillRect(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop, 2, 2);
         }
     }
 
-    draw(x,y, action, color) {
-        console.log('draw', x, y, action, color);
-        this.context.fillStyle = color;
-        this.context.strokeStyle = color;
-        //this.context.fillRect(x, y, 2, 2);
-        switch (action) {
-            case 'down':
-                this.context.beginPath();
-                this.context.moveTo(x, y);
-                
-                break;
-            case 'move':
-                this.context.lineTo(x, y);
-                this.context.stroke();
-                break;
-            case 'up':
-                this.context.closePath();
-        }
-        
-
-        // this.context.beginPath();
-        // this.context.moveTo(x, y);
-        // this.context.lineTo(x, y);
-        // this.context.stroke();
-    }
 }
 
 export default new Toolbar();
