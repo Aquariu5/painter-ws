@@ -1,7 +1,7 @@
 import { useState } from "react";
 import cl from '../styles/Canvas.module.css';
 import { observer } from "mobx-react-lite";
-const Name = ({name, display, top, left}) => {
+const Name = ({name, top, left}) => {
     // const [name, setName] = useState('');
     // const [display, setDisplay] = useState('none');
     // const [top, setTop] = useState(0);

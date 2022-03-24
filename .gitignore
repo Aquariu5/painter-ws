@@ -1,2 +1,6 @@
 front/node_modules
 serv/node_modules
+node_modules/*
+dist
+build
+front/build

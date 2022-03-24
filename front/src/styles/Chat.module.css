@@ -11,7 +11,7 @@
 .MessagesSpace {
     height: 94%;
     max-height: inherit;
-    overflow: scroll;
+    overflow: auto;
     max-height: 77vh;
 }
 
@@ -19,7 +19,7 @@
     border: 1px dashed blue;
     width: 50%;
     border-radius: 20px;
-    
+    overflow: hidden;
     margin: 10px;
 }
 

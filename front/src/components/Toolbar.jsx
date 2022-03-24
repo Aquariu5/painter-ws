@@ -55,8 +55,7 @@ export const Toolbar = observer(() => {
                     aria-label="Default"
                     valueLabelDisplay="auto"
                     style={{width: '100px', marginLeft: '20px'}}
-                    value={toolbar.width}
-                    onChange={e => toolbar.toolbar.setWidth(e.target.value)}
+                    onChange={(e) => toolbar.toolbar.setWidth(e.target.value)}
                 />
             </Tooltip>
 

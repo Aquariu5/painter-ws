@@ -8,4 +8,5 @@
 .Name {
     position: absolute;
     z-index: 999;
+    pointer-events: none;
 }

@@ -15,8 +15,8 @@ import Chat from './components/Chat';
 
  import { Footer } from './components/Footer';
 import cl from './styles/App.module.css';
-import Toolbar from './components/Toolbar';
-import Canvas from './components/Canvas'
+import Toolbar from './components/Toolbar.jsx';
+import Canvas from './components/Canvas.jsx'
 function App() {
 
   let [state, setState] = useState(1);
